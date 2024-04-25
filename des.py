@@ -5,7 +5,6 @@ import binascii
 
 
 def encrypt(key, word):
-
     # Initialize DES cipher with the key
     cipher = des(key, padmode=PAD_PKCS5)
 
@@ -22,7 +21,6 @@ def encrypt(key, word):
 
 
 def decrypt(key, encrypted_word):
-
     # Initialize DES cipher with the key
     cipher = des(key, padmode=PAD_PKCS5)
 

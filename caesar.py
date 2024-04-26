@@ -1,4 +1,18 @@
+# The Caesar cipher shifts each letter in the plaintext by a fixed number of positions down the alphabet.
+# It's a basic substitution cipher where the same key (shift value) is used for both encryption and decryption.
+# However, due to its simplicity, it's highly vulnerable to brute-force and frequency analysis attacks.
+# This algorithm skips numbers and do not work with russian expressions
+import re
+
+
+def is_valid(s):
+    reg_exp = re.compile(r"^[a-zA-Z0-9?><;,{}[\]\-_+=!@#$%^&*|']*$")
+    return reg_exp.match(s)
+
+
 def encrypt(message, key):
+    assert is_valid(message)
+
     encrypted_message = ""
     for char in message:
         # Check if the character is an uppercase letter
@@ -17,6 +31,8 @@ def encrypt(message, key):
 
 
 def decrypt(encrypted_message, key):
+    assert is_valid(encrypted_message)
+
     decrypted_message = ""
     for char in encrypted_message:
         # Check if the character is an uppercase letter

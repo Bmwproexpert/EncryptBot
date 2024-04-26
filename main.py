@@ -1,7 +1,9 @@
 import asyncio
+import binascii
 import logging
 import sys
 
+import cryptography.fernet
 from aiogram import Bot, Dispatcher, F
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
@@ -65,8 +67,8 @@ async def des_encrypt(message: Message) -> None:
             await message.answer(des.encrypt(DES_KEY, MESSAGE))
         else:
             await message.answer("At first, write the text")
-    except:
-        await message.answer("Something wrong")
+    except Exception as e:
+        await message.answer(f"Something wrong ({e})")
 
 
 @dp.message(F.text.lower() == 'des decrypt')
@@ -78,8 +80,10 @@ async def des_encrypt(message: Message) -> None:
             await message.answer(des.decrypt(DES_KEY, MESSAGE))
         else:
             await message.answer("At first, write the text")
-    except:
-        await message.answer("Something wrong")
+    except binascii.Error as e:
+        await message.answer("Invalid input")
+    except Exception as e:
+        await message.answer(f"Something wrong {(e)}")
 
 
 @dp.message(F.text.lower() == 'caesar encrypt')
@@ -91,12 +95,14 @@ async def caesar_encrypt(message: Message) -> None:
             await message.answer(caesar.encrypt(MESSAGE, CAESAR_KEY))
         else:
             await message.answer("At first, write the text")
-    except:
-        await message.answer("Something wrong")
+    except AssertionError as e:
+        await message.answer("Invalid input")
+    except Exception as e:
+        await message.answer(f"Something wrong ({e.with_traceback(None)})")
 
 
 @dp.message(F.text.lower() == 'caesar decrypt')
-async def caesar_encrypt(message: Message) -> None:
+async def caesar_decrypt(message: Message) -> None:
     try:
         global MESSAGE
         global CAESAR_KEY
@@ -104,8 +110,10 @@ async def caesar_encrypt(message: Message) -> None:
             await message.answer(caesar.decrypt(MESSAGE, CAESAR_KEY))
         else:
             await message.answer("At first, write the text")
-    except:
-        await message.answer("Something wrong")
+    except AssertionError as e:
+        await message.answer("Invalid input")
+    except Exception as e:
+        await message.answer(f"Something wrong ({e.with_traceback(None)})")
 
 
 @dp.message(F.text.lower() == 'fernet encrypt')
@@ -117,8 +125,8 @@ async def fernet_encrypt(message: Message) -> None:
             await message.answer(fernet.encrypt(MESSAGE, FERNET_KEY))
         else:
             await message.answer("At first, write the text")
-    except:
-        await message.answer("Something wrong")
+    except Exception as e:
+        await message.answer(f"Something wrong ({e.with_traceback(None)})")
 
 
 @dp.message(F.text.lower() == 'fernet decrypt')
@@ -130,8 +138,10 @@ async def fernet_encrypt(message: Message) -> None:
             await message.answer(fernet.decrypt(MESSAGE, FERNET_KEY))
         else:
             await message.answer("At first, write the text")
-    except:
-        await message.answer("Something wrong")
+    except cryptography.fernet.InvalidToken as e:
+        await message.answer("Invalid input")
+    except Exception as e:
+        await message.answer(f"Something wrong ({e.with_traceback(None)})")
 
 
 @dp.message()
@@ -139,10 +149,13 @@ async def text_handler(message: Message) -> None:
     try:
         global MESSAGE
         MESSAGE = message.text
-    except:
-        await message.answer("Something wrong")
+        await message.answer(text='Choose the next action', reply_markup=builder.as_markup())
+    except Exception as e:
+        await message.answer(f"Something wrong ({e.with_traceback(None)})")
 
 
+# we got params to Bot with init() and then start polling, using dispatcher,
+# then on any message we have few handlers for processing them
 async def main() -> None:
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     await dp.start_polling(bot)

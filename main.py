@@ -75,7 +75,7 @@ async def des_encrypt(message: Message) -> None:
 async def des_encrypt(message: Message) -> None:
     try:
         global MESSAGE
-        if MESSAGE != None:
+        if MESSAGE is not None:
             global DES_KEY
             await message.answer(des.decrypt(DES_KEY, MESSAGE))
         else:
@@ -90,7 +90,7 @@ async def des_encrypt(message: Message) -> None:
 async def caesar_encrypt(message: Message) -> None:
     try:
         global MESSAGE
-        if (MESSAGE != None):
+        if (MESSAGE is not None):
             global CAESAR_KEY
             await message.answer(caesar.encrypt(MESSAGE, CAESAR_KEY))
         else:
@@ -106,7 +106,7 @@ async def caesar_decrypt(message: Message) -> None:
     try:
         global MESSAGE
         global CAESAR_KEY
-        if MESSAGE != None:
+        if MESSAGE is not None:
             await message.answer(caesar.decrypt(MESSAGE, CAESAR_KEY))
         else:
             await message.answer("At first, write the text")
@@ -120,7 +120,7 @@ async def caesar_decrypt(message: Message) -> None:
 async def fernet_encrypt(message: Message) -> None:
     try:
         global MESSAGE
-        if (MESSAGE != None):
+        if MESSAGE is not None:
             global FERNET_KEY
             await message.answer(fernet.encrypt(MESSAGE, FERNET_KEY))
         else:
@@ -134,7 +134,7 @@ async def fernet_encrypt(message: Message) -> None:
     try:
         global MESSAGE
         global FERNET_KEY
-        if MESSAGE != None:
+        if MESSAGE is not None:
             await message.answer(fernet.decrypt(MESSAGE, FERNET_KEY))
         else:
             await message.answer("At first, write the text")

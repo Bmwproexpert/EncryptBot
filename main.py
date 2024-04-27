@@ -55,7 +55,6 @@ builder.button(text='Fernet decrypt')
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
     await message.answer("First, write the text, and then select the appropriate button for encryption or decryption.")
-    await message.answer(text="buttons", reply_markup=builder.as_markup())
 
 
 @dp.message(F.text.lower() == 'des encrypt')

@@ -44,20 +44,20 @@ dp = Dispatcher()
 MESSAGE = None
 
 builder = keyboard.ReplyKeyboardBuilder()
-builder.button(text='DES encrypt')
-builder.button(text='DES decrypt')
-builder.button(text='Caesar encrypt')
-builder.button(text='Caesar decrypt')
-builder.button(text='Fernet encrypt')
-builder.button(text='Fernet decrypt')
+builder.button(text='DES шифрование')
+builder.button(text='DES расшифровка')
+builder.button(text='Шифрование Цезарем')
+builder.button(text='Расшифровка Цезарем')
+builder.button(text='Fernet шифрование')
+builder.button(text='Fernet расшифровка')
 
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    await message.answer("First, write the text, and then select the appropriate button for encryption or decryption.")
+    await message.answer("Сначала напишите текст и затем выберите нужную кнопку для зашифровки или расшифровки текста.")
 
 
-@dp.message(F.text.lower() == 'des encrypt')
+@dp.message(F.text.lower() == 'des шифрование')
 async def des_encrypt(message: Message) -> None:
     try:
         global MESSAGE
@@ -65,12 +65,12 @@ async def des_encrypt(message: Message) -> None:
             global DES_KEY
             await message.answer(des.encrypt(DES_KEY, MESSAGE))
         else:
-            await message.answer("At first, write the text")
+            await message.answer("Сначала отправьте текст")
     except Exception as e:
-        await message.answer(f"Something wrong ({e})")
+        await message.answer(f"Что-то пошло не так ({e})")
 
 
-@dp.message(F.text.lower() == 'des decrypt')
+@dp.message(F.text.lower() == 'des расшифровка')
 async def des_encrypt(message: Message) -> None:
     try:
         global MESSAGE
@@ -78,14 +78,14 @@ async def des_encrypt(message: Message) -> None:
             global DES_KEY
             await message.answer(des.decrypt(DES_KEY, MESSAGE))
         else:
-            await message.answer("At first, write the text")
+            await message.answer("Сначала отправьте текст")
     except binascii.Error as e:
-        await message.answer("Invalid input")
+        await message.answer("Неверный ввод")
     except Exception as e:
-        await message.answer(f"Something wrong {(e)}")
+        await message.answer(f"Что-то не так {(e)}")
 
 
-@dp.message(F.text.lower() == 'caesar encrypt')
+@dp.message(F.text.lower() == 'шифрование цезарем')
 async def caesar_encrypt(message: Message) -> None:
     try:
         global MESSAGE
@@ -93,14 +93,14 @@ async def caesar_encrypt(message: Message) -> None:
             global CAESAR_KEY
             await message.answer(caesar.cae_enc(MESSAGE, CAESAR_KEY))
         else:
-            await message.answer("At first, write the text")
+            await message.answer("Сначала отправьте текст")
     except AssertionError as e:
-        await message.answer("Invalid input")
+        await message.answer("Неверный ввод")
     except Exception as e:
-        await message.answer(f"Something wrong ({e.with_traceback(None)})")
+        await message.answer(f"Что-то не так ({e.with_traceback(None)})")
 
 
-@dp.message(F.text.lower() == 'caesar decrypt')
+@dp.message(F.text.lower() == 'расшифровка цезарем')
 async def caesar_decrypt(message: Message) -> None:
     try:
         global MESSAGE
@@ -108,14 +108,14 @@ async def caesar_decrypt(message: Message) -> None:
         if MESSAGE is not None:
             await message.answer(caesar.cae_dec(MESSAGE, CAESAR_KEY))
         else:
-            await message.answer("At first, write the text")
+            await message.answer("Сначала отправьте текст")
     except AssertionError as e:
-        await message.answer("Invalid input")
+        await message.answer("Неверный ввод")
     except Exception as e:
-        await message.answer(f"Something wrong ({e.with_traceback(None)})")
+        await message.answer(f"Что-то не так ({e.with_traceback(None)})")
 
 
-@dp.message(F.text.lower() == 'fernet encrypt')
+@dp.message(F.text.lower() == 'fernet шифрование')
 async def fernet_encrypt(message: Message) -> None:
     try:
         global MESSAGE
@@ -123,12 +123,12 @@ async def fernet_encrypt(message: Message) -> None:
             global FERNET_KEY
             await message.answer(fernet.encrypt(MESSAGE, FERNET_KEY))
         else:
-            await message.answer("At first, write the text")
+            await message.answer("Сначала отправьте текст")
     except Exception as e:
-        await message.answer(f"Something wrong ({e.with_traceback(None)})")
+        await message.answer(f"Что-то не так ({e.with_traceback(None)})")
 
 
-@dp.message(F.text.lower() == 'fernet decrypt')
+@dp.message(F.text.lower() == 'fernet расшифровка')
 async def fernet_encrypt(message: Message) -> None:
     try:
         global MESSAGE
@@ -136,11 +136,11 @@ async def fernet_encrypt(message: Message) -> None:
         if MESSAGE is not None:
             await message.answer(fernet.decrypt(MESSAGE, FERNET_KEY))
         else:
-            await message.answer("At first, write the text")
+            await message.answer("Сначала отправьте текст")
     except cryptography.fernet.InvalidToken as e:
-        await message.answer("Invalid input")
+        await message.answer("Неверный ввод")
     except Exception as e:
-        await message.answer(f"Something wrong ({e.with_traceback(None)})")
+        await message.answer(f"Что-то не так ({e.with_traceback(None)})")
 
 
 @dp.message()
@@ -148,9 +148,9 @@ async def text_handler(message: Message) -> None:
     try:
         global MESSAGE
         MESSAGE = message.text
-        await message.answer(text='Choose the next action', reply_markup=builder.as_markup())
+        await message.answer(text='Выберите следующее действие', reply_markup=builder.as_markup())
     except Exception as e:
-        await message.answer(f"Something wrong ({e.with_traceback(None)})")
+        await message.answer(f"Что-то не так ({e.with_traceback(None)})")
 
 
 # we got params to Bot with init() and then start polling, using dispatcher,

@@ -89,9 +89,9 @@ async def des_encrypt(message: Message) -> None:
 async def caesar_encrypt(message: Message) -> None:
     try:
         global MESSAGE
-        if (MESSAGE is not None):
+        if MESSAGE is not None:
             global CAESAR_KEY
-            await message.answer(caesar.encrypt(MESSAGE, CAESAR_KEY))
+            await message.answer(caesar.cae_enc(MESSAGE, CAESAR_KEY))
         else:
             await message.answer("At first, write the text")
     except AssertionError as e:
@@ -106,7 +106,7 @@ async def caesar_decrypt(message: Message) -> None:
         global MESSAGE
         global CAESAR_KEY
         if MESSAGE is not None:
-            await message.answer(caesar.decrypt(MESSAGE, CAESAR_KEY))
+            await message.answer(caesar.cae_dec(MESSAGE, CAESAR_KEY))
         else:
             await message.answer("At first, write the text")
     except AssertionError as e:

@@ -1,7 +1,7 @@
-# The Caesar cipher shifts each letter in the plaintext by a fixed number of positions down the alphabet.
-# It's a basic substitution cipher where the same key (shift value) is used for both encryption and decryption.
-# However, due to its simplicity, it's highly vulnerable to brute-force and frequency analysis attacks.
-# This algorithm skips numbers and do not work with russian expressions
+# Шифр Цезаря сдвигает каждую букву в открытом тексте на фиксированное количество позиций вниз по алфавиту.
+# Это базовый шифр подстановки, в котором один и тот же ключ (значение сдвига) используется как для шифрования, так и для дешифрования.
+# Однако из-за своей простоты он очень уязвим для атак методом перебора и частотного анализа.
+# Этот алгоритм пропускает числа
 import re
 from re import Match
 

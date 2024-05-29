@@ -1,6 +1,6 @@
-# DES (Data Encryption Standard) is a symmetric block cipher algorithm. It divides data into fixed-size blocks and
-# applies multiple rounds of substitutions and permutations based on a 56-bit key. Despite its historical
-# significance, DES is now vulnerable to brute-force attacks due to its short key length.
+# DES (Стандарт шифрования данных) - это алгоритм симметричного блочного шифрования. Он разделяет данные на блоки фиксированного размера и
+# применяет несколько циклов замен и перестановок на основе 56-битного ключа. Несмотря на свою историческую
+# важно отметить, что DES теперь уязвим для атак методом перебора из-за своей короткой длины ключа.
 
 from pyDes import des, PAD_PKCS5
 import binascii

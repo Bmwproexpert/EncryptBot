@@ -1,7 +1,7 @@
-# The Fernet cipher is a symmetric encryption algorithm based on AES.
-# It encrypts data using a key derived from a passphrase and includes authentication to ensure data integrity.
-# Each token includes a timestamp to prevent replay attacks.
-# It's easy to use and popular in Python applications due to its inclusion in the cryptography library.
+# Шифр Фернет - это симметричный алгоритм шифрования, основанный на AES.
+# Он шифрует данные с помощью ключа, полученного из парольной фразы, и включает аутентификацию для обеспечения целостности данных.
+# Каждый токен содержит временную метку для предотвращения повторных атак.
+# Он прост в использовании и популярен в приложениях на Python благодаря своему включению в криптографическую библиотеку.
 
 from cryptography.fernet import Fernet
 

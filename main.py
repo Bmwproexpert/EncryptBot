@@ -153,8 +153,8 @@ async def text_handler(message: Message) -> None:
         await message.answer(f"Что-то не так ({e.with_traceback(None)})")
 
 
-# we got params to Bot with init() and then start polling, using dispatcher,
-# then on any message we have few handlers for processing them
+# мы получили параметры для бота с помощью init(), а затем запустили опрос, используя dispatcher,
+# тогда для любого сообщения у нас есть несколько обработчиков для их обработки
 async def main() -> None:
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     await dp.start_polling(bot)

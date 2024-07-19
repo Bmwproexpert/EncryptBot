@@ -12,3 +12,4 @@ Then run the bot with
 ```
 docker compose up
 ```
+Don`t forget to paste your token in **config.json**
